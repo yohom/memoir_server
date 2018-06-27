@@ -1,4 +1,4 @@
-package me.yohom.memoir
+package me.yohom.memoir.bean
 
 import java.sql.Date
 import javax.persistence.Entity
