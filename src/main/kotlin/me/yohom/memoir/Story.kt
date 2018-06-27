@@ -13,5 +13,5 @@ data class Story(
         var storyContent: String? = "",
         var storyImage: String? = "",
         var storyDate: Date? = null,
-        var character: String? = ""
+        var hero: String? = ""
 )
