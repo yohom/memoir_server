@@ -1,6 +1,7 @@
 package me.yohom.memoir
 
 import me.yohom.memoir.bean.Empty
+import me.yohom.memoir.bean.ImageInfo
 import me.yohom.memoir.bean.Response
 import me.yohom.memoir.bean.Story
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,7 +26,7 @@ class StoryController {
     }
 
     @PostMapping("/add_image")
-    fun saveImage(@RequestParam("file") file: MultipartFile): Response<Empty> {
+    fun saveImage(@RequestParam("file") file: MultipartFile): Response<ImageInfo> {
         try {
             val path = Paths.get("$IMAGE_PATH/${file.originalFilename}")
             Files.write(path, file.bytes)
@@ -34,6 +35,11 @@ class StoryController {
             return Response(error = true, message = "保存文件失败")
         }
 
-        return Response()
+        return Response(results = listOf(ImageInfo("$IMAGE_URL/${file.originalFilename}")))
+    }
+
+    @GetMapping("/annalistic")
+    fun getAnnalistic(): Response<Pair<String, List<Story>>> {
+        return Response(results = repo.findAll().groupBy { it.storyDate.toString() }.toList())
     }
 }
