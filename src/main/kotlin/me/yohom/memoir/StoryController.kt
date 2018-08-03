@@ -5,6 +5,7 @@ import me.yohom.memoir.bean.ImageInfo
 import me.yohom.memoir.bean.Response
 import me.yohom.memoir.bean.Story
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.io.IOException
@@ -38,8 +39,10 @@ class StoryController {
         return Response(results = listOf(ImageInfo("$IMAGE_URL/${file.originalFilename}")))
     }
 
-    @GetMapping("/annalistic")
-    fun getAnnalistic(): Response<Pair<String, List<Story>>> {
-        return Response(results = repo.findAll().groupBy { it.storyDate.toString() }.toList())
-    }
+//    @GetMapping("/annalistic")
+//    fun getAnnalistic(): Response<List<Story>> {
+//        return Response(results = repo.findAll(Sort.by(Sort.Order.desc("storyDate")))
+//                .groupBy { it.storyDate?.year }
+//                .mapTo(mutableListOf<List<Story>>()) { it.value })
+//    }
 }

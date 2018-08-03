@@ -12,6 +12,6 @@ data class Story(
         var title: String = "",
         var storyContent: String = "",
         var storyImage: String = "",
-        var storyDate: Date? = null,
+        var storyDate: String = "",
         var hero: String = ""
 )
